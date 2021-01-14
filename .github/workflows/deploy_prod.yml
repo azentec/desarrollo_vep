@@ -24,7 +24,7 @@ jobs:
       env:
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
       with:
-        args: set image --record -n vep-ns deployment/prod-app-desarrollo_vep-deployment app-vep=${{ github.repository }}:${{ github.sha }}
+        args: set image --record -n vep-ns deployment/prod-app-vep-deployment app-vep=${{ github.repository }}:${{ github.sha }}
     - name: verify deployment
       uses: steebchen/kubectl@master
       env:

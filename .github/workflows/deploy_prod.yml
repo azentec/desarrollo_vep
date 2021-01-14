@@ -24,11 +24,11 @@ jobs:
       env:
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
       with:
-        args: set image --record -n desarrollo_vep-ns deployment/prod-app-desarrollo_vep-deployment app-desarrollo_vep=${{ github.repository }}:${{ github.sha }}
+        args: set image --record -n vep-ns deployment/prod-app-desarrollo_vep-deployment app-vep=${{ github.repository }}:${{ github.sha }}
     - name: verify deployment
       uses: steebchen/kubectl@master
       env:
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         KUBECTL_VERSION: "1.15"
       with:
-        args: '"rollout status -n desarrollo_vep-ns deployment/prod-app-desarrollo_vep-deployment"'
+        args: '"rollout status -n vep-ns deployment/prod-app-vep-deployment"'

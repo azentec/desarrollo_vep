@@ -20,15 +20,15 @@ jobs:
         tag_with_sha: true
         tags: ${{ github.sha }}
     - name: deployment to k8s
-      uses: steebchen/kubectl@master
-      env:
-        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+      uses: steebchen/kubectl@v2.0.0
       with:
+        config: ${{ secrets.KUBE_CONFIG_DATA }}
         args: set image --record -n vep-ns deployment/prod-app-vep-deployment app-vep=${{ github.repository }}:${{ github.sha }}
     - name: verify deployment
-      uses: steebchen/kubectl@master
+      uses: steebchen/kubectl@v2.0.0
       env:
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         KUBECTL_VERSION: "1.15"
       with:
+        config: ${{ secrets.KUBE_CONFIG_DATA }}
         args: '"rollout status -n vep-ns deployment/prod-app-vep-deployment"'
